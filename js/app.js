@@ -242,13 +242,35 @@ function showSpinner(msg) {
 function navHtml() {
   const offline = OFFLINE_MODE ? `<span style="font-size:11px;background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:20px;margin-left:6px">offline</span>` : '';
   return `<nav>
-    <a href="#" class="nav-logo" onclick="renderHome()">Quick<em>Fixer</em>${offline}</a>
+    <a href="#" class="nav-logo" onclick="renderHome();closeDrawer()"">Quick<em>Fixer</em>${offline}</a>
     <div class="nav-links">
       <a href="#" onclick="renderDirectory()">${t('nav_find')}</a>
       <a href="#" onclick="renderRegister()" class="nav-btn">${t('nav_join')}</a>
       <button class="lang-btn" onclick="setLang(LANG==='si'?'en':'si')">${t('lang_btn')}</button>
     </div>
-  </nav>`;
+    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-drawer" id="nav-drawer">
+    <a href="#" onclick="renderDirectory();closeDrawer()">${t('nav_find')}</a>
+    <button class="lang-btn" style="text-align:left;border:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);border-radius:0;background:none;color:rgba(255,255,255,.85);font-size:15px;font-weight:500;" onclick="setLang(LANG==='si'?'en':'si');closeDrawer()">${t('lang_btn')}</button>
+    <a href="#" onclick="renderRegister();closeDrawer()" class="drawer-cta">${t('nav_join')}</a>
+  </div>`;
+}
+
+function toggleDrawer() {
+  const h = document.getElementById('nav-hamburger');
+  const d = document.getElementById('nav-drawer');
+  if (!h||!d) return;
+  h.classList.toggle('open');
+  d.classList.toggle('open');
+}
+function closeDrawer() {
+  const h = document.getElementById('nav-hamburger');
+  const d = document.getElementById('nav-drawer');
+  if (h) h.classList.remove('open');
+  if (d) d.classList.remove('open');
 }
 function footerHtml() {
   return `<footer>
@@ -377,18 +399,18 @@ function renderHomeContent() {
       </div>
     </div>
 
-    <div style="background:#1c1917;padding:3rem 2rem;">
-      <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center">
+    <div class="cta-section">
+      <div class="cta-inner">
         <div>
           <h2 style="color:white;font-size:24px;margin-bottom:1rem">${t('cta_h')}</h2>
-          <p style="color:rgba(255,255,255,.7);font-size:15px;margin-bottom:1.5rem">${t('cta_p')}</p>
+          <p style="color:rgba(255,255,255,.7);font-size:15px;margin-bottom:1.5rem;line-height:1.6">${t('cta_p')}</p>
           <button class="btn-hero-main" onclick="renderRegister()">${t('cta_btn')}</button>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="cta-features">
           ${['feat1','feat2','feat3','feat4'].map(k=>`
-            <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:14px;color:white">
-              <div style="color:var(--orange);font-size:18px;margin-bottom:5px">✓</div>
-              <div style="font-size:13px;font-weight:500">${t(k)}</div>
+            <div class="cta-feat">
+              <div class="cta-feat-icon">✓</div>
+              <div class="cta-feat-text">${t(k)}</div>
             </div>`).join('')}
         </div>
       </div>
