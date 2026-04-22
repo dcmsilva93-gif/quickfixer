@@ -107,7 +107,7 @@ function rerenderCurrent() {
 // ─── STRINGS ──────────────────────────────────────────────────
 const STRINGS = {
   si:{
-    app_name:'QuickFixer', nav_find:'සේවා සපයන්නෙකු සොයන්න',
+    app_name:'Fixmate.lk', nav_find:'සේවා සපයන්නෙකු සොයන්න',
     nav_join:'සේවා සපයන්නෙකු ලෙස එකතු වන්න', lang_btn:'English',
     hero_tag:'මිනුවන්ගොඩ සහ අවට ප්‍රදේශ',
     hero_h1a:'විශ්වාසනීය', hero_h1b:'ශිල්පීන් සොයා ගන්න',
@@ -140,15 +140,15 @@ const STRINGS = {
     req_fields:'සියලු * ක්ෂේත්‍ර පුරවන්න.', reg_toast:'සාර්ථකව ලියාපදිංචි කෙරිණි!',
     r_name_ph:'ඔබේ නම', r_phone_ph:'07X-XXXXXXX', r_exp_ph:'උදා: 5',
     r_bio_ph:'ඔබේ කුසලතා විස්තර කරන්න...', r_cert_ph:'උදා: NVQ Level 3',
-    footer_main:'QuickFixer · මිනුවන්ගොඩ ශිල්පීන් සහ ගනුදෙනුකරුවන් සම්බන්ධ කරයි',
+    footer_main:'Fixmate.lk · මිනුවන්ගොඩ ශිල්පීන් සහ ගනුදෙනුකරුවන් සම්බන්ධ කරයි',
     modal_avail:'ලබාගත හැකි', modal_jobs:'රැකියා', yes_lbl:'ඔව්', busy_lbl:'කාර්යබද්ධ',
-    wa_msg:'ආයුබෝවන්, QuickFixer හරහා ඔබව සොයා ගත්තෙමි. ඔබේ සේවාව අවශ්‍යයි.',
+    wa_msg:'ආයුබෝවන්, Fixmate.lk හරහා ඔබව සොයා ගත්තෙමි. ඔබේ සේවාව අවශ්‍යයි.',
     loading:'පූරණය වෙමින්...', saving:'සුරැකෙමින්...', saved:'සාර්ථකව සුරැකිණි!',
     save_fail:'සුරැකීම අසාර්ථකයි.', req_all:'සියලු * ක්ෂේත්‍ර පුරවන්න.',
     offline_banner:'⚠️ Offline mode — data not saved to cloud',
   },
   en:{
-    app_name:'QuickFixer', nav_find:'Find a Service Provider',
+    app_name:'Fixmate.lk', nav_find:'Find a Service Provider',
     nav_join:'Join as a Service Provider', lang_btn:'සිංහල',
     hero_tag:'Minuwangoda & Surrounding Areas',
     hero_h1a:'Find Trusted Local', hero_h1b:'Tradespeople Fast',
@@ -180,9 +180,9 @@ const STRINGS = {
     req_fields:'Please fill in all required fields.', reg_toast:'Registered successfully!',
     r_name_ph:'Your full name', r_phone_ph:'07X-XXXXXXX', r_exp_ph:'e.g. 5',
     r_bio_ph:'Describe your skills and services...', r_cert_ph:'e.g. NVQ Level 3',
-    footer_main:'QuickFixer · Connecting Minuwangoda\'s tradespeople with customers',
+    footer_main:'Fixmate.lk · Connecting Minuwangoda\'s tradespeople with customers',
     modal_avail:'Available', modal_jobs:'Jobs', yes_lbl:'Yes', busy_lbl:'Busy',
-    wa_msg:'Hi, I found you on QuickFixer. I need your services.',
+    wa_msg:'Hi, I found you on Fixmate.lk. I need your services.',
     loading:'Loading...', saving:'Saving...', saved:'Saved!',
     save_fail:'Save failed.', req_all:'Please fill all required fields.',
     offline_banner:'⚠️ Offline mode — data not saved to cloud',
@@ -205,11 +205,11 @@ const TRADES = [
   {id:'other',       si:'වෙනත්',           en:'Other',       icon:'➕'},
 ];
 const AREAS = ['Minuwangoda','Seeduwa','Katunayake','Negombo','Ja-Ela','Divulapitiya','Veyangoda','Gampaha','Wattala','Ragama'];
-const AV_COLORS = ['av-o','av-g','av-b','av-p'];
+const AV_COLORS = ['av-b','av-n','av-a','av-g'];
 
 // Fallback offline data shown when Supabase not yet set up
 const DEMO_PROS = [
-  {id:1,name:'Kamal Silva',trade:'electrical',area:'Minuwangoda',phone:'071-1234567',rating:5.0,jobs_count:48,verified:true,available:true,featured:true,bio_si:'අවුරුදු 12 පළපුරුද්ද ඇති විදුලි ශිල්පියෙකි.',bio_en:'Licensed electrician, 12 yrs experience.',initials:'KS',color:'av-o'},
+  {id:1,name:'Kamal Silva',trade:'electrical',area:'Minuwangoda',phone:'071-1234567',rating:5.0,jobs_count:48,verified:true,available:true,featured:true,bio_si:'අවුරුදු 12 පළපුරුද්ද ඇති විදුලි ශිල්පියෙකි.',bio_en:'Licensed electrician, 12 yrs experience.',initials:'KS',color:'av-b'},
   {id:2,name:'Ranjith Perera',trade:'plumbing',area:'Minuwangoda',phone:'077-2345678',rating:4.5,jobs_count:31,verified:true,available:true,featured:false,bio_si:'විශේෂඥ ජලනල ශිල්පියෙකි.',bio_en:'Expert plumber, fast response.',initials:'RP',color:'av-b'},
   {id:3,name:'Nimal de Silva',trade:'carpentry',area:'Seeduwa',phone:'076-3456789',rating:5.0,jobs_count:62,verified:true,available:false,featured:false,bio_si:'රිසිකර ගෘහ භාණ්ඩ සහ ලී වැඩ.',bio_en:'Custom furniture, doors, windows.',initials:'ND',color:'av-g'},
 ];
@@ -242,7 +242,16 @@ function showSpinner(msg) {
 function navHtml() {
   const offline = OFFLINE_MODE ? `<span style="font-size:11px;background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:20px;margin-left:6px">offline</span>` : '';
   return `<nav>
-    <a href="#" class="nav-logo" onclick="renderHome();closeDrawer()"">Quick<em>Fixer</em>${offline}</a>
+    <a href="#" class="nav-logo" onclick="renderHome();closeDrawer()">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 10.5L8 5.5L11 8.5L17 3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="15" cy="14" r="3" fill="#F5A623"/>
+          <path d="M6 13L9 16" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="nav-logo-text">fix<em>mate</em><span class="lk">.lk</span></span>
+    </a>
     <div class="nav-links">
       <a href="#" onclick="renderDirectory()">${t('nav_find')}</a>
       <a href="#" onclick="renderRegister()" class="nav-btn">${t('nav_join')}</a>
@@ -274,13 +283,14 @@ function closeDrawer() {
 }
 function footerHtml() {
   return `<footer>
+    <span class="footer-logo">fix<em>mate</em><span class="lk">.lk</span></span>
     <p>${t('footer_main')}</p>
-    <p style="margin-top:6px">
+    <p style="margin-top:8px">
       <a href="#" onclick="renderDirectory()">${t('nav_find')}</a> ·
       <a href="#" onclick="renderRegister()">${t('nav_join')}</a>
     </p>
-    <p style="margin-top:12px">
-      <a href="#" onclick="renderAdminLogin()" style="color:rgba(255,255,255,0.12);font-size:11px;text-decoration:none">&#9679;</a>
+    <p style="margin-top:16px;font-size:11px;opacity:.4">
+      <a href="#" onclick="renderAdminLogin()" style="color:rgba(255,255,255,0.3);text-decoration:none">&#9679;</a>
     </p>
   </footer>`;
 }
@@ -312,7 +322,7 @@ function proCard(p) {
           :`<div style="font-size:11px;color:#9ca3af;margin-top:4px">${t('busy')}</div>`}
       </div>
     </div>
-    <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;line-height:1.5">${getBio(p)}</p>
+    <p class="pro-bio">${getBio(p)}</p>
     <div class="pro-stats">
       <div class="pro-stat"><strong>${p.jobs_count||0}</strong> ${t('jobs_done')}</div>
       <div class="pro-stat"><strong>${(p.rating||0).toFixed(1)}</strong> ${t('rating_lbl')}</div>
@@ -595,12 +605,12 @@ function renderAdminLogin() {
   document.getElementById('app').innerHTML=`
     <div class="login-wrap">
       <div class="login-card">
-        <div class="login-logo">Quick<em>Fixer</em> Admin</div>
+        <div class="login-logo">fix<em>mate</em><span class="lk">.lk</span> Admin</div>
         <div class="form-group"><label>Username</label><input type="text" id="au" placeholder="admin"/></div>
         <div class="form-group"><label>Password</label><input type="password" id="ap" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()"/></div>
         <button class="submit-btn" onclick="doAdminLogin()">Login →</button>
         <p style="font-size:12px;color:var(--text-muted);text-align:center;margin-top:1rem">
-          <a href="#" onclick="renderHome()" style="color:var(--orange);text-decoration:none">← Back to QuickFixer</a>
+          <a href="#" onclick="renderHome()" style="color:var(--blue,#1B4FE4);text-decoration:none">← Back to QuickFixer</a>
         </p>
       </div>
     </div>`;
@@ -620,7 +630,7 @@ async function renderAdmin(tab) {
   await loadPros(); await loadJobs();
   document.getElementById('app').innerHTML=`
     <nav>
-      <a href="#" class="nav-logo" onclick="renderHome()">Quick<em>Fixer</em> <span style="font-size:12px;color:var(--orange);margin-left:4px;font-weight:400">Admin</span></a>
+      <a href="#" class="nav-logo" onclick="renderHome()"><span class="nav-logo-text" style="color:white">fix<em>mate</em><span class="lk">.lk</span></span> <span style="font-size:12px;color:var(--amber,#F5A623);margin-left:6px;font-weight:400;font-family:var(--font-body)">Admin</span></a>
       <div class="nav-links">
         <a href="#" onclick="renderHome()" style="color:rgba(255,255,255,.7);font-size:13px">← Public site</a>
         <button class="lang-btn" onclick="adminLoggedIn=false;renderAdminLogin()">Logout</button>
@@ -640,7 +650,7 @@ async function renderAdmin(tab) {
         </div>
         <div style="padding:1rem 1.5rem;margin-top:1rem;border-top:1px solid rgba(255,255,255,.08)">
           <div style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:6px">DATABASE</div>
-          <div style="font-size:12px;color:${OFFLINE_MODE?'#fbbf24':'#34d399'}">
+          <div style="font-size:12px;color:${OFFLINE_MODE?'#F5A623':'#34d399'}">
             ${OFFLINE_MODE?'⚠ Offline mode':'✓ Supabase connected'}
           </div>
           <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:3px">${PROFESSIONALS.length} professionals · ${JOB_REQUESTS.length} jobs</div>
@@ -881,11 +891,11 @@ function adminStatsHtml() {
     <div class="admin-header"><h2>Statistics</h2><p>Live data from Supabase</p></div>
     <div class="admin-stats">
       <div class="stat-card"><div class="num">${total}</div><div class="lbl">Total Professionals</div></div>
-      <div class="stat-card"><div class="num orange">${featured}</div><div class="lbl">Featured (Paid)</div></div>
+      <div class="stat-card"><div class="num amber">${featured}</div><div class="lbl">Featured (Paid)</div></div>
       <div class="stat-card"><div class="num">${verified}</div><div class="lbl">Verified</div></div>
       <div class="stat-card"><div class="num">${available}</div><div class="lbl">Available Now</div></div>
       <div class="stat-card"><div class="num">${JOB_REQUESTS.length}</div><div class="lbl">Total Job Requests</div></div>
-      <div class="stat-card"><div class="num orange">${openJobs}</div><div class="lbl">Open Requests</div></div>
+      <div class="stat-card"><div class="num amber">${openJobs}</div><div class="lbl">Open Requests</div></div>
     </div>
     <div class="admin-table-wrap" style="max-width:500px">
       <div style="padding:1rem 1.25rem;border-bottom:1px solid var(--border);font-weight:600;font-size:14px">By Trade</div>
